@@ -15,17 +15,23 @@
                 cellphone: document.getElementById('cellphone').value
             }
             localStorage.setItem(id, JSON.stringify(data));
-            getContact()
-        }
-        function getContact(){
-          const getting = JSON.parse(localStorage.getItem(id));
-          updateTable()
+            updateTable()
         }
         function updateTable(){
-          
+          const getting = JSON.parse(localStorage.getItem(id));
+          console.log(getting)
+          const tableContent = document.getElementById("table");
+          tableContent.innerHTML += `
+                <tr>
+                <th scope="row">${id}</th>
+                <td>${getting.name}</td>
+                <td>${getting.cellphone}</td>
+                <td><button type="button" class="btn btn-danger" onclick="removeContact()">Deletar</button></td>
+                </tr>`;
         }
         function removeContact(){
           localStorage.removeItem(id);
+          document.getElementById("table").deleteRow(id);
         }
     </script>
 </head>
@@ -44,7 +50,7 @@
             <button type="submit" class="btn btn-primary mb-3">Cadastrar</button>
         </div>
         </form>
-        <table class="table">
+        <table class="table" id="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -53,20 +59,6 @@
                 <th scope="col">Ação</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Teste 1</td>
-                <td>18 000 000 000</td>
-                <td><button type="button" class="btn btn-danger">Deletar</button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>teste 2</td>
-                <td>67 000 000 000</td>
-                <td><button type="button" class="btn btn-danger">Deletar</button></td>
-              </tr>
-            </tbody>
           </table>
     </div>
 </body>
