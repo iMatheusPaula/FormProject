@@ -7,18 +7,28 @@
     <meta name="viewport" content="width=device-width, initia-scale=1.0">
     <title>Formulario Matheus</title>
     <script> 
+        var id = 0;
         function insertContact(){
+            id++
             const data = {
                 name: document.getElementById('name').value,
-                cellphone: document.getElementById('cellphone').value,
+                cellphone: document.getElementById('cellphone').value
             }
-            localStorage.contact(JSON.stringify(data));
+            localStorage.setItem(id, JSON.stringify(data));
+            getContact()
+        }
+        function getContact(){
+          const getting = JSON.parse(localStorage.getItem(id));
+          updateTable()
+        }
+        function updateTable(){
+          
         }
     </script>
 </head>
 <body>
     <div class="container p-5">
-        <form method="get">
+        <form action="#" onsubmit="insertContact(this)">
         <div class="mb-3">
             <label for="name" class="form-label">Nome:</label>
             <input type="text" class="form-control" id="name">
@@ -55,8 +65,6 @@
               </tr>
             </tbody>
           </table>
-
-
     </div>
 </body>
 </html>
